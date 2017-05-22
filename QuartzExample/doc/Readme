@@ -114,4 +114,15 @@ Use job listeners to have one job trigger another job, building a simple workflo
 
 
 
+有一個JobChainingJobListener，
+可以用來串Job，但是job會是已經加入shceduler的樣子。
+job要是durable。
+
+    JobDetail job = newJob(SimpleJob1.class).withIdentity("job1").build();
+    JobDetail job2 = newJob(SimpleJob2.class).withIdentity("job2").storeDurably().build();
+    sched.addJob(job2, true);
+    jobChainingJobListener.addJobChainLink(job.getKey(), job2.getKey());
+    sched.getListenerManager().addJobListener(jobChainingJobListener);
+
+前一個發生exception錯誤，下一個還是會照跑。
 
