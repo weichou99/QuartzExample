@@ -125,4 +125,33 @@ job要是durable。
     sched.getListenerManager().addJobListener(jobChainingJobListener);
 
 前一個發生exception錯誤，下一個還是會照跑。
+JobListener的jobWasExecuted(JobExecutionContext, JobExecutionException) method，
+有一個JobExecutionException參數，
+試過，前一個job發生exception時，要執行下一個job，會進到jobWasExecuted(JobExecutionContext, JobExecutionException)這個method，
+且JobExecutionException參數不會是null，前一個正常結束，則這個參數會是null。
+也許就用這個判斷，前一個是否成功執行完成。
+
+
+另一個問題，會不會前一個還在跑，就執行第2個了???
+測試是一個接一個。
+
+====================================================================================================
+Example 10 - Using Quartz Plug-Ins
+Demonstrates the use of the XML Job Initialization plug-in as well as the History Logging plug-ins
+
+這個有設定檔。
+
+====================================================================================================
+Example 11 - Quartz Under High Load
+Quartz can run a lot of jobs but see how thread pools can limit how many jobs can execute simultaneously
+
+這個有設定檔。
+
+====================================================================================================
+Example 12 - Remote Job Scheduling using RMI
+Using Remote Method Invocation, a Quartz scheduler can be remotely scheduled by a client
+
+這個有設定檔。
+
+
 
