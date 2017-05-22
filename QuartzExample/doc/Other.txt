@@ -1,0 +1,2 @@
+SchedulerFactory sf = new StdSchedulerFactory("example11/quartz.properties");
+可從程式指定要載入的設定檔。
