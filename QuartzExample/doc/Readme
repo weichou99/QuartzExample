@@ -1,0 +1,117 @@
+====================================================================================================
+example1
+可以直接執行。
+應該是安排一個偶數分鐘的執行的一個job，
+但好像沒效，觀察好像是整數分鐘就執行。
+
+
+StdSchedulerFactory
+
+RAM-based scheduler
+
+sched.scheduleJob(job, trigger);
+
+sched.start();
+
+
+sched.shutdown(true);
+Note: passing true into the shutdown message tells the Quartz Scheduler to wait until all jobs have completed running before returning from the method call.
+
+
+====================================================================================================
+example2
+可以直接執行。
+展示各種安排job的方式。
+
+
+同一個Job可以同時排給不同trigger。
+
+Job可以在排程start()之前安排。
+也可以在start()之後加入。
+
+Job可以直接執行，不用trigger。(直接執行？重新執行？)
+
+也可以重新安排。
+
+
+====================================================================================================
+example3
+可以直接執行。
+展示各種安排CronTrigger的方式。
+
+用cron-expression來排定時間。
+
+
+
+====================================================================================================
+example4
+展示Job保持狀態的方式。
+Job的class property無法用來保持狀態值。
+必須要用JobDataMap。
+
+Job的class多了2個annotation，
+org.quartz.PersistJobDataAfterExecution
+跟
+org.quartz.DisallowConcurrentExecution
+
+
+DisallowConcurrentExecution
+一次只能有一個job instance執行，不能多個。
+比如說A job，執行需要34秒，且它被排定每30秒執行一次，這種情況就會有一段時間有2個A job instance在執行。
+
+PersistJobDataAfterExecution
+會讓JobDataMap的資料，在job執行完之後，才存入scheduler的JobStore裡。
+
+Note: to prevent race-conditions on saved data.
+
+
+Quartz每次都會new一個新的job instance，
+所以不能用class member variable來保持狀態。
+
+
+====================================================================================================
+example5
+This example is designed to demonstrate concepts related to trigger misfires.
+不同的misfire策略。
+
+Note: The trigger for job #2 is set with a misfire instruction
+that will cause it to reschedule with the existing repeat count.
+This policy forces quartz to refire the trigger as soon as possible.
+
+Job #1 uses the default “smart” misfire policy for simple triggers,
+which causes the trigger to fire at it’s next normal execution time.
+
+====================================================================================================
+Example 6 - Dealing with Job Exceptions
+
+Job發生exception後繼續跑。
+
+Job發生exception後停止相關trigger，不繼續該job。
+
+
+====================================================================================================
+Example 7 - Interrupting Jobs
+Shows how the scheduler can interrupt your jobs and how to code your jobs to deal with interruptions
+
+實作InterruptableJob interface。
+org.quartz.InterruptableJob.interrupt()
+
+用來停止job?
+
+
+
+
+====================================================================================================
+Example 8 - Fun with Calendars
+Demonstrates how a Holiday calendar can be used to exclude execution of jobs on a holiday
+
+排除某幾天，不執行job。
+
+====================================================================================================
+Example 9 - Job Listeners
+Use job listeners to have one job trigger another job, building a simple workflow
+
+
+
+
+
