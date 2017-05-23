@@ -40,7 +40,7 @@ example3
 展示各種安排CronTrigger的方式。
 
 用cron-expression來排定時間。
-
+一種以日期為基礎的方式。
 
 
 ====================================================================================================
@@ -153,5 +153,10 @@ Using Remote Method Invocation, a Quartz scheduler can be remotely scheduled by 
 
 這個有設定檔。
 
+
+====================================================================================================
+Example 13 - Clustered Quartz
+Demonstrates how Quartz can be used in a clustered environment and how Quartz can use the database to persist scheduling information
+這個有設定檔。
 
 
