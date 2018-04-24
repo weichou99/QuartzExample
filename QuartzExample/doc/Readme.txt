@@ -153,6 +153,10 @@ Using Remote Method Invocation, a Quartz scheduler can be remotely scheduled by 
 
 這個有設定檔。
 
+一種Client-Server的架構。
+透過設定，Server可以接收Client送來的trigger跟job。
+Server端負責執行，Client端可以排新的trigger跟job，但不會執行job。
+
 
 ====================================================================================================
 Example 13 - Clustered Quartz

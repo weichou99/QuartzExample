@@ -1,2 +1,17 @@
 SchedulerFactory sf = new StdSchedulerFactory("example11/quartz.properties");
 可從程式指定要載入的設定檔。
+
+
+
+
+取得目前scheduler的狀態 -> 取trigger的狀態(triggerstate)
+
+
+排程程式啟動後，再排定工作是可以的。
+
+
+排程程式獨立執行，作為Server。可另外由client排定工作到server上。
+
+
+
+
